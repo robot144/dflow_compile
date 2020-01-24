@@ -64,6 +64,7 @@ if [ "$COMPILER" == "gcc" ];then
 		echo "Could not find gfortran"
 		exit 1
 	fi
+	export COMPILERTYPE="gnu"
 else
 	temp=`which icc`
 	if [ -z "$temp" ] ; then
@@ -75,12 +76,14 @@ else
 		echo "Could not find ifort"
 		exit 1
 	fi
+	export COMPILERTYPE="ifort"
 fi
 
-# get dflow code from repos
-./scripts/dflowfm_checkout.sh
+## get dflow code from repos
+#./scripts/dflowfm_checkout.sh
 
-#./mpi_install.sh ifort 64 noshared
+## build mpi
+./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
 
 #./netcdf_install.sh ifort 64 netcdf4
 

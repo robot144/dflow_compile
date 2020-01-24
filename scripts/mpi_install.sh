@@ -81,6 +81,10 @@ if [ "$FORT" == "ifort" ];then
 	export IFORTPATH=`which ifort 2>/dev/null`
 	if [ ! -z "$IFORTPATH" ]; then
 		export MYFORT="$IFORTPATH"
+	        export ICCPATH=`which icc 2>/dev/null`
+		export MYCC="$ICCPATH"
+	        export ICPCPATH=`which icpc 2>/dev/null`
+		export MYCXX="$ICPCPATH"
 	else
 		echo "No ifort compiler found"
 		exit 1
@@ -90,6 +94,10 @@ if [ "$FORT" == "gnu" ];then
 	export GFORTRANPATH=`which gfortran 2>/dev/null`
 	if [ ! -z "$GFORTRANPATH" ]; then
 		export MYFORT="$GFORTRANPATH"
+	        export GCCPATH=`which gcc 2>/dev/null`
+		export MYCC="$GCCPATH"
+	        export GXXPATH=`which g++ 2>/dev/null`
+		export MYCXX="$GXXPATH"
 	else
 		echo "No gfortran compiler found"
 		exit 1
@@ -112,7 +120,7 @@ export BASE=$PWD
 #
 export MPIVERSION='3.3.1'
 export EXTRACTDIR="$BASE/mpich-$MPIVERSION"
-export MPIFILE="mpich-${MPIVERSION}.tar.gz"
+export MPIFILE="external_sources/mpich-${MPIVERSION}.tar.gz"
 # http://www.mpich.org/static/downloads/3.3.1/mpich-3.3.1.tar.gz
 export MPIURL="http://www.mpich.org/static/downloads/$MPIVERSION/mpich-$MPIVERSION.tar.gz"
 if [ ! -f "$MPIFILE" ]; then
@@ -164,7 +172,7 @@ fi
 # use lib also for 64bit
 #$EXTRACTDIR/configure --prefix=$BASE/mpich_$SYSTEM --libdir=$BASE/mpich_$SYSTEM/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT"
 #TODO workaround for aout of source build
-./configure --prefix=$BASE/mpich_$SYSTEM --libdir=$BASE/mpich_$SYSTEM/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT" CC=icc CXX=icpc
+./configure --prefix=$BASE/mpich_$SYSTEM --libdir=$BASE/mpich_$SYSTEM/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
 
 make
 #make check #optional tests
