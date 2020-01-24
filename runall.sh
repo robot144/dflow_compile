@@ -86,9 +86,10 @@ fi
 #./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
 
 ## build NetCDF including NetCDF4 and fortran bindings
-./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
+#./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
 
-#./petsc_install.sh
+## buld petsc
+./scripts/petsc_install.sh $COMPILERTYPE
 
 #./metis_install.sh
 
