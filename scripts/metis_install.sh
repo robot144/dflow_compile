@@ -1,29 +1,44 @@
 #! /bin/sh
 # compile metis
+# argument gnu or ifort
+
+#
+# check argument
+#
+if [ $# -lt 1 ]; then
+        echo "This script needs an argument. Allowed values are: gnu or ifort"
+	exit 1
+fi
+export COMPILERTYPE=$1 
+echo "COMPILERTYPE $COMPILERTYPE"
 
 # tarball: metis-5.1.0.tar.gz from
 # http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
 export METIS_VERSION=5.1.0
 
 # ifort compiler and 64bit !!!
-if [ ! -f `which ifort` ]; then
-   echo 'Please use ifort settings first'
-   exit 1
+if [ "$COMPILERTPE" ==  "ifort" ]; then
+	echo "Using ifort"
+	CC=icc
+elif [ "$COMPILERTYPE" == "gnu" ]; then
+	CC=gcc
+else
+	echo "Wrong argument for metis_install.sh Valid are ifort and gnu"
+	exit 1
 fi
-CC=icc
 
 # clean up any remaining targets
-rm -rf metis_linux64_ifort
+rm -rf metis_linux64_${COMPILERTYPE}
 rm -rf metis-$METIS_VERSION
-mkdir metis_linux64_ifort
+mkdir metis_linux64_${COMPILERTYPE}
 
 # unpack tar-ball
-tar -xzf metis-$METIS_VERSION.tar.gz
+tar -xzf external_sources/metis-$METIS_VERSION.tar.gz
 pushd metis-$METIS_VERSION
 
 export BASE=$PWD
 
-make config prefix=$PWD/../metis_linux64_ifort shared=1 cc=${CC}  2>&1 |tee myconfig.log
+make config prefix=$PWD/../metis_linux64_${COMPILERTYPE} shared=1 cc=${CC}  2>&1 |tee myconfig.log
 
 make 2>&1 | tee mymake.log
 

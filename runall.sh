@@ -45,7 +45,7 @@ echo "SETTINGS $SETTINGS" #debug output
 
 # check if programs needed are there
 # test for programs
-programs=("make" "automake" "svn" "autoreconf" "libtool")
+programs=("make" "automake" "svn" "autoreconf" "libtool" "cmake")
 for program in ${programs[@]} ;do
 	temp=`which $program`
 	if [ -z "$temp" ] ; then
@@ -88,9 +88,10 @@ fi
 ## build NetCDF including NetCDF4 and fortran bindings
 #./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
 
-## buld petsc
-./scripts/petsc_install.sh $COMPILERTYPE
+## build petsc
+#./scripts/petsc_install.sh $COMPILERTYPE
 
-#./metis_install.sh
+## build metis 
+./scripts/metis_install.sh $COMPILERTYPE
 
 #./dflowfm_compile_trunk_intel18.sh
