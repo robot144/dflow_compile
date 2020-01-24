@@ -92,6 +92,7 @@ fi
 #./scripts/petsc_install.sh $COMPILERTYPE
 
 ## build metis 
-./scripts/metis_install.sh $COMPILERTYPE
+#./scripts/metis_install.sh $COMPILERTYPE
 
-#./dflowfm_compile_trunk_intel18.sh
+## Finally build Delft3D includig DFLOW itself
+./scripts/dflowfm_compile_trunk.sh $COMPILERTYPE

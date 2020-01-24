@@ -17,7 +17,7 @@ echo "COMPILERTYPE $COMPILERTYPE"
 export METIS_VERSION=5.1.0
 
 # Compiler selection
-if [ "$COMPILERTPE" ==  "ifort" ]; then
+if [ "$COMPILERTYPE" ==  "ifort" ]; then
 	echo "Using ifort"
 	CC=icc
 elif [ "$COMPILERTYPE" == "gnu" ]; then
