@@ -16,7 +16,7 @@ echo "COMPILERTYPE $COMPILERTYPE"
 # http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
 export METIS_VERSION=5.1.0
 
-# ifort compiler and 64bit !!!
+# Compiler selection
 if [ "$COMPILERTPE" ==  "ifort" ]; then
 	echo "Using ifort"
 	CC=icc
