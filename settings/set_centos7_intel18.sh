@@ -3,7 +3,7 @@
 echo "Settings for Centos7 with Intel 18 compiler"
 #module load intel/18.0.3
 . /opt/intel/18.0.3/bin/compilervars.sh -arch intel64 -platform linux 
-export LIBIFPORT=/opt/intel/18.0.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin
+export IFORTLIB=/opt/intel/18.0.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin
 
 ## no modules on devux
 #module load autoconf

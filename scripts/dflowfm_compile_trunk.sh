@@ -84,7 +84,6 @@ FFLAGS="$OPTIM -I$NETCDFROOT/include/ -I$MPI_ROOT/include/ -I$METIS_ROOT/include
 #    CFLAGS='-O2' CXXFLAGS='-O2' FFLAGS='-O2' FCFLAGS='-O2' ./configure --prefix=`pwd` --with-netcdf --with-mpi --with-metis --with-petsc
 #make 2>&1 |tee mymake.log
 
-exit 1
 
 FC=mpif90 make ds-install 2>&1 |tee mymake.log
 

@@ -95,4 +95,10 @@ fi
 #./scripts/metis_install.sh $COMPILERTYPE
 
 ## Finally build Delft3D includig DFLOW itself
-./scripts/dflowfm_compile_trunk.sh $COMPILERTYPE
+#./scripts/dflowfm_compile_trunk.sh $COMPILERTYPE
+
+## Copy intel runtime libs to target in case of ifort
+export DFLOWFMROOT=${PWD}/dflowfm_linux64_${COMPILERTYPE}
+if [ "$COMPILERTYPE" == "ifort" ] ; then
+   ./scripts/copylibs_intel.sh
+fi
