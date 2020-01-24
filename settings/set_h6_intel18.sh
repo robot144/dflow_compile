@@ -7,3 +7,4 @@ module load intel/18.0.3
 
 module load subversion
 
+export SETTINGS=T
