@@ -83,9 +83,10 @@ fi
 #./scripts/dflowfm_checkout.sh
 
 ## build mpi
-./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
+#./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
 
-#./netcdf_install.sh ifort 64 netcdf4
+## build NetCDF including NetCDF4 and fortran bindings
+./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
 
 #./petsc_install.sh
 

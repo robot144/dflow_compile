@@ -93,6 +93,9 @@ if [ "$FORT" == "ifort" ];then
 fi
 if [ "$FORT" == "gnu" ];then
 	export GFORTRANPATH=`which gfortran 2>/dev/null`
+	export FC=gfortran
+        export CC=gcc
+        export CXX=g++
 	if [ ! -z "$GFORTRANPATH" ]; then
 		export MYFORT="$GFORTRANPATH"
 	else
@@ -124,7 +127,7 @@ if [ "$USENETCDF4" == "yes" ]; then
         #https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.1/src/hdf5-1.10.1.tar.gz
 	export HDFVERSION='1.10.4'
 	export HDFMAINVERSION='1.10'
-	export HDFFILE="hdf5-${HDFVERSION}.tar.gz"
+	export HDFFILE="external_sources/hdf5-${HDFVERSION}.tar.gz"
 	export HDFURL="https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDFMAINVERSION}/hdf5-${HDFVERSION}/src/hdf5-${HDFVERSION}.tar.gz"
 	if [ ! -f "$HDFFILE" ]; then
 		echo "curl -o ${HDFFILE} ${HDFURL} "
@@ -170,7 +173,7 @@ fi
 #
 #ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-c-4.6.2.tar.gz
 export NETCDFVERSION='4.6.2'
-export NETCDFFILE="netcdf-c-${NETCDFVERSION}.tar.gz"
+export NETCDFFILE="external_sources/netcdf-c-${NETCDFVERSION}.tar.gz"
 export NETCDFURL="ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-c-${NETCDFVERSION}.tar.gz"
 if [ ! -f "$NETCDFFILE" ]; then
 	curl -o "$NETCDFFILE"  "$NETCDFURL"
@@ -181,7 +184,7 @@ if [ ! -f "$NETCDFFILE" ]; then
 fi
 #ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz
 export NETCDFFORTRANVERSION='4.4.4'
-export NETCDFFORTRANFILE="netcdf-fortran-${NETCDFFORTRANVERSION}.tar.gz"
+export NETCDFFORTRANFILE="external_sources/netcdf-fortran-${NETCDFFORTRANVERSION}.tar.gz"
 echo "NETCDFFORTRANFILE = ${NETCDFFORTRANFILE}"
 export NETCDFFORTRANURL="ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-${NETCDFFORTRANVERSION}.tar.gz"
 if [ ! -f "${NETCDFFORTRANFILE}" ]; then
