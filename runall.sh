@@ -3,7 +3,7 @@
 # main compile script 
 # requires one argument string like bare_centos7_intel18 or docker_suse15.1_gcc
 
-allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gnu")
+allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gcc")
 
 #
 # check argument
@@ -79,26 +79,38 @@ else
 	export COMPILERTYPE="ifort"
 fi
 
-## get dflow code from repos
-#./scripts/dflowfm_checkout.sh
-
 ## build mpi
-#./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
+if [ ! -d "mpich_linux64_${COMPILERTYPE}" ]; then
+   ./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
+fi
 
 ## build NetCDF including NetCDF4 and fortran bindings
-#./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
+if [ ! -d "netcdf_linux64_${COMPILERTYPE}" ]; then
+   ./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
+fi
 
 ## build petsc
-#./scripts/petsc_install.sh $COMPILERTYPE
+if [ ! -d "petsc_linux64_${COMPILERTYPE}" ]; then
+   ./scripts/petsc_install.sh $COMPILERTYPE
+fi
 
 ## build metis 
-#./scripts/metis_install.sh $COMPILERTYPE
+if [ ! -d "metis_linux64_${COMPILERTYPE}" ]; then
+   ./scripts/metis_install.sh $COMPILERTYPE
+fi
+
+## get dflow code from repos
+if [ ! -d dflowfm-trunk ]; then
+   ./scripts/dflowfm_checkout.sh
+fi
 
 ## Finally build Delft3D includig DFLOW itself
-#./scripts/dflowfm_compile_trunk.sh $COMPILERTYPE
+if [ ! -d "dflowfm_linux64_${COMPILERTYPE}" ]; then
+   ./scripts/dflowfm_compile_trunk.sh $COMPILERTYPE
+   # Copy intel runtime libs to target in case of ifort
+   export DFLOWFMROOT=${PWD}/dflowfm_linux64_${COMPILERTYPE}
+   if [ "$COMPILERTYPE" == "ifort" ] ; then
+      ./scripts/copylibs_intel.sh
+   fi
+fi 
 
-## Copy intel runtime libs to target in case of ifort
-export DFLOWFMROOT=${PWD}/dflowfm_linux64_${COMPILERTYPE}
-if [ "$COMPILERTYPE" == "ifort" ] ; then
-   ./scripts/copylibs_intel.sh
-fi
