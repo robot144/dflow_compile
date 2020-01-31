@@ -12,6 +12,6 @@ export DFLOWFMROOT="${DFLOWFMROOT}/.."
 export PATH=$DFLOWFMROOT/bin:$PATH
 export LD_LIBRARY_PATH=$DFLOWFMROOT/lib:$LD_LIBRARY_PATH
 ulimit -s unlimited
-cp $DFLOWFMROOT/share/dflowfm/unstruc.ini .
+#cp $DFLOWFMROOT/share/dflowfm/unstruc.ini .
 
-$DFLOWFMROOT/bin/dflowfm $* --autostartstop
+gdb --args $DFLOWFMROOT/bin/dflowfm $* --autostartstop
