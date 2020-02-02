@@ -12,11 +12,17 @@ fi
 export COMPILERTYPE=$1 
 echo "COMPILERTYPE $COMPILERTYPE"
 
+if [ -z "${METISROOT}" ]; then
+   export BASE=$PWD
+   export METISROOT=${BASE}/metis_linux64_${COMPILERTYPE}
+fi
+
 # tarball: metis-5.1.0.tar.gz from
 # http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
 export METIS_VERSION=5.1.0
 
 # Compiler selection
+echo "CC before modification ${CC}"
 if [ "$COMPILERTYPE" ==  "ifort" ]; then
 	echo "Using ifort"
 	CC=icc
@@ -36,9 +42,8 @@ mkdir metis_linux64_${COMPILERTYPE}
 tar -xzf external_sources/metis-$METIS_VERSION.tar.gz
 pushd metis-$METIS_VERSION
 
-export BASE=$PWD
 
-make config prefix=$PWD/../metis_linux64_${COMPILERTYPE} shared=1 cc=${CC}  2>&1 |tee myconfig.log
+make config prefix=${METISROOT} shared=1 cc=${CC}  2>&1 |tee myconfig.log
 
 make 2>&1 | tee mymake.log
 

@@ -15,22 +15,30 @@ module load libtool/2.4.3
 module load mpich2/3.3_intel_18.0.3
 export MPIROOT=/opt/mpich2/3.3_intel18.0.3
 export MPI_LOCAL=F
+
 #NETCDF
 module load netcdf/v4.6.2_v4.4.4_intel_18.0.3
 export NETCDF_LOCAL=F
 export NETCDFROOT=/opt/netcdf/v4.6.2_v4.4.4_intel_18.0.3
+
 #PETSC
-module load petsc/3.9.3_intel18.0.3_mpich_3.3
-export PETSC_LOCAL=F
-export PETSCROOT=/opt/petsc/with_mpich_3.3/3.9.3_intel18.0.3
-#METIS
-module load metis/5.1.0_intel18.0.3
-export METIS_LOCAL=F
-export METISROOT=/opt/metis/5.1.0_intel18.0.3
-#setenv METIS_DIR        $prefix
-#prepend-path --delim " "                CPPFLAGS                -I$prefix/include
-#prepend-path --delim " "        LDFLAGS         -L$prefix/lib
+export PETSC_LOCAL=T
+if [ "${PETSC_LOCAL}" == "F" ]; then
+   module load petsc/3.9.3_intel18.0.3_mpich_3.3
+   export PETSCROOT=/opt/petsc/with_mpich_3.3/3.9.3_intel18.0.3
+   echo "PETSCROOT = ${PETSCROOT}"
+else
+   echo "Building local PETSC"
+fi
 
-
+#METIS systerm
+export METIS_LOCAL=T
+if [ "$METIS_LOCAL}" == "F" ]; then
+   module load metis/5.1.0_intel18.0.3
+   export METISROOT=/opt/metis/5.1.0_intel18.0.3
+   echo "METISROOT = ${METISROOT}"
+else
+   echo "Building local Metis"
+fi
 
 export SETTINGS=T

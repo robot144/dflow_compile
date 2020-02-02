@@ -66,25 +66,25 @@ for program in ${programs[@]} ;do
 	fi
 done
 if [ "$COMPILER" == "gcc" ];then
-	temp=`which gcc`
-	if [ -z "$temp" ] ; then
+	export CC=`which gcc`
+	if [ -z "$CC" ] ; then
 		echo "Could not find gcc"
 		exit 1
 	fi
-	temp=`which gfortran`
-	if [ -z "$temp" ] ; then
+	export FC=`which gfortran`
+	if [ -z "$FC" ] ; then
 		echo "Could not find gfortran"
 		exit 1
 	fi
 	export COMPILERTYPE="gnu"
 else
-	temp=`which icc`
-	if [ -z "$temp" ] ; then
+	export CC=`which icc`
+	if [ -z "$CC" ] ; then
 		echo "Could not find icc"
 		exit 1
 	fi
-	temp=`which ifort`
-	if [ -z "$temp" ] ; then
+	export FC=`which ifort`
+	if [ -z "$FC" ] ; then
 		echo "Could not find ifort"
 		exit 1
 	fi
@@ -109,7 +109,7 @@ if [ "$NETCDF_LOCAL" == "T" ]; then
    fi
    export PATH=${NETCDFROOT}/bin:${PATH}
    export LD_LIBRARY_PATH=${NETCDFROOT}/lib:${LD_LIBRARYPATH}
-   export PKG_CONFIG_PATH=${NETCDFROOT}/pkgconfig:${PKG_CONFIG_PATH}
+   export PKG_CONFIG_PATH=${NETCDFROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}
 fi
 
 ## build petsc
@@ -119,8 +119,8 @@ if [ "$PETSC_LOCAL" == "T" ]; then
       ./scripts/petsc_install.sh $COMPILERTYPE
    fi
    export PATH=${PETSCROOT}/bin:${PATH}
-   export LD_LIBRARY_PATH=${PETSCROOT}/lib:${LD_LIBRARYPATH}
-   export PKG_CONFIG_PATH=${PETSCROOT}/pkgconfig:${PKG_CONFIG_PATH}
+   export LD_LIBRARY_PATH=${PETSCROOT}/lib:${LD_LIBRARY_PATH}
+   export PKG_CONFIG_PATH=${PETSCROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}
 fi
 
 ## build metis 
@@ -143,12 +143,13 @@ fi
 export DFLOWFMROOT=${BASE}/dflowfm_linux64_${COMPILERTYPE}
 if [ ! -d "${DFLOWFMROOT}" ]; then
    ./scripts/dflowfm_compile.sh $COMPILERTYPE
-    Copy intel runtime libs to target in case of ifort
+   #Copy intel runtime libs to target in case of ifort
    if [ "$COMPILERTYPE" == "ifort" ] ; then
       ./scripts/copylibs_intel.sh
    fi
-   #./scripts/copy_files.sh #add files needed to run as stand-alone package
+   ./scripts/copy_files.sh #add files needed to run as stand-alone package
 fi
+#./scripts/copy_files.sh #add files needed to run as stand-alone package
 
 
 

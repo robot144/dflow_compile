@@ -10,7 +10,7 @@ export flags="-g"
 #compiler flags hopefully not needed
 export configureArgs=""
 export CFLAGS=""
-export fflags="" #included later in FCFLAGS and FFLAGS
+export fflags="" #included in FCFLAGS and FFLAGS for DFLOW
 export FFLAGS=""
 export FCFLAGS=""
 export CXXFLAGS=""

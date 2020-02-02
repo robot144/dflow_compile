@@ -13,7 +13,10 @@ export COMPILERTYPE=$1
 echo "COMPILERTYPE $COMPILERTYPE"
 
 export PETSC_VERSION=3.9.4
-export BASE=$PWD
+if [ -z "${PETSCROOT}" ]; then
+   export BASE=$PWD
+   export PETSCROOT=${PWD}/petsc_linux64_${COMPILERTYPE}
+fi
 
 # download tgz if not already there
 #http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-3.9.4.tar.gz
@@ -30,7 +33,7 @@ fi
 
 
 # clean up any remaining targets
-rm -rf petsc_linux64_$COMPILERTYPE
+rm -rf ${PETSCROOT}
 rm -rf petsc-$PETSC_VERSION
 
 # unpack tar-ball
@@ -38,19 +41,20 @@ tar -xzvf $PETSC_FILE
 pushd petsc-$PETSC_VERSION
 
 #mpi
-export MPI_ROOT=${BASE}/mpich_linux64_${COMPILERTYPE}
-export MPI_LIBS="-L${MPI_ROOT}/lib -lmpich -lpthread -lrt -i-static"
-export MPI_RSH="ssh"
-export PATH=$MPI_ROOT/bin:$PATH
-export LD_LIBRARY_PATH=$MPI_ROOT/lib:$LD_LIBRARY_PATH
+#export MPIROOT=${BASE}/mpich_linux64_${COMPILERTYPE}
+#export MPI_LIBS="-L${MPIROOT}/lib -lmpich -lpthread -lrt -i-static"
+#export MPI_RSH="ssh"
+#export PATH=$MPI_ROOT/bin:$PATH
+#export LD_LIBRARY_PATH=$MPIROOT/lib:$LD_LIBRARY_PATH
 #this should not be needed, but is for now
-export LDFLAGS="-L$MPI_ROOT/lib"
+#export LDFLAGS="-L$MPI_ROOT/lib"
 
 #removed -xHOST from FOPTFLAGS
 # removed -no-prec-div from FOPTFLAGS
-./configure --prefix=$PWD/../petsc_linux64_${COMPILERTYPE} --with-mpi=1 --with-mpi-dir=${MPI_ROOT}  \
-  --download-fblaslapack=1 --FOPTFLAGS="-O2 " --CXXOPTFLAGS="-O2 "\
-  --with-debugging=0 --with-shared-libraries=1 --with-x=0 --with-valgrind=0 --COPTFLAGS="-O2 " 
+./configure --prefix=${PETSCROOT} --with-mpi=1 --with-mpi-dir=${MPIROOT}  \
+  --download-fblaslapack=1 --FOPTFLAGS="${flags} " --CXXOPTFLAGS="${flags} "\
+  --with-debugging=0 --with-shared-libraries=1 --with-x=0 --with-valgrind=0 \
+  --with-matlab-socket=0 --COPTFLAGS="${flags} " 
 # --with-pthread=0 ??? also available for /opt
 
 make 2>&1 >mymake.log
