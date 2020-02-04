@@ -3,25 +3,31 @@
 
 echo "Copy additional files to folder: ${DFLOWFMROOT}"
 
+if [ -z "${DFLOWFMROOT}" ]; then
+   echo "Variable DFLOWFMROOT was empty. This script relies on several env vars."
+   echo "It is normally called from runall.sh, not directly."
+   exit 1
+fi
+
 #add runscripts
 cp runscripts/*.* ${DFLOWFMROOT}/bin/
 
 #mpi
 echo "MPI: ${MPIROOT}"
 cp ${MPIROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp -r ${MPIROOT}/lib/* ${DFLOWFMROOT}/lib/
+cp ${MPIROOT}/lib/* ${DFLOWFMROOT}/lib/
 
 #netcdf
 echo "NETCDF: ${NETCDFROOT}"
 cp ${NETCDFROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp -r ${NETCDFROOT}/lib/* ${DFLOWFMROOT}/lib/
+cp ${NETCDFROOT}/lib/*.* ${DFLOWFMROOT}/lib/
 
 #petsc
 echo "PETSC: ${PETSCROOT}"
 #cp ${PETSCROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp -r ${PETSCROOT}/lib/* ${DFLOWFMROOT}/lib/
+cp ${PETSCROOT}/lib/*.* ${DFLOWFMROOT}/lib/
 
 #metis
 echo "METIS: ${METISROOT}"
 #cp ${METISROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp -r ${METISROOT}/lib/* ${DFLOWFMROOT}/lib/
+cp ${METISROOT}/lib/*.* ${DFLOWFMROOT}/lib/

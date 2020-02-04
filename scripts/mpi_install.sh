@@ -131,6 +131,10 @@ if [ ! -f "$MPIFILE" ]; then
 	fi
 fi
 
+if [ -z "${MPIROOT}" ]; then
+   export MPIROOT="${BASE}/mpich_linux64_${FORT}"
+fi
+
 #
 # Here we assume the tarball is already there.
 #
@@ -171,8 +175,10 @@ fi
 # install to dirs like linux32_ifort
 # use lib also for 64bit
 #$EXTRACTDIR/configure --prefix=$BASE/mpich_$SYSTEM --libdir=$BASE/mpich_$SYSTEM/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT"
-#TODO workaround for aout of source build
-./configure --prefix=$BASE/mpich_$SYSTEM --libdir=$BASE/mpich_$SYSTEM/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
+#TODO workaround for out of source build
+#./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
+# try with shared libs
+./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib $SHAREDFLAGS --enable-cxx FFLAGS=" $archflag" CFLAGS=" $archflag" CXXFLAGS=" $archflag" FCFLAGS=" $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
 
 make
 #make check #optional tests

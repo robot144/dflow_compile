@@ -95,10 +95,11 @@ fi
 if [ "$MPI_LOCAL" == "T" ]; then
    export MPIROOT=${BASE}/mpich_linux64_${COMPILERTYPE}
    if [ ! -d "${MPIROOT}" ]; then
-      ./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
+      #./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
+      ./scripts/mpi_install.sh $COMPILERTYPE 64 shared
    fi
    export PATH=${MPIROOT}/bin:${PATH}
-   export LD_LIBRARY_PATH=${MPIROOT}/lib:${LD_LIBRARYPATH}
+   export LD_LIBRARY_PATH=${MPIROOT}/lib:${LD_LIBRARY_PATH}
 fi
 
 ## build NetCDF including NetCDF4 and fortran bindings
@@ -108,7 +109,7 @@ if [ "$NETCDF_LOCAL" == "T" ]; then
       ./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
    fi
    export PATH=${NETCDFROOT}/bin:${PATH}
-   export LD_LIBRARY_PATH=${NETCDFROOT}/lib:${LD_LIBRARYPATH}
+   export LD_LIBRARY_PATH=${NETCDFROOT}/lib:${LD_LIBRARY_PATH}
    export PKG_CONFIG_PATH=${NETCDFROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}
 fi
 
@@ -149,7 +150,7 @@ if [ ! -d "${DFLOWFMROOT}" ]; then
    fi
    ./scripts/copy_files.sh #add files needed to run as stand-alone package
 fi
-#./scripts/copy_files.sh #add files needed to run as stand-alone package
+# ./scripts/copy_files.sh #add files needed to run as stand-alone package
 
 
 

@@ -2,7 +2,6 @@
 
 
 rm -rf dflowfm_linux64_ifort
-rm -rf dflowfm-trunk
 rm -rf hdf5-1.10.4
 rm -rf hdf_linux64_ifort
 rm -rf hdf_linux64_ifort_temp
@@ -18,3 +17,6 @@ rm -rf netcdf_linux64_ifort
 rm -rf netcdf_linux64_ifort_temp
 rm -rf petsc-3.9.4
 rm -rf petsc_linux64_ifort
+
+
+#rm -rf dflowfm-trunk

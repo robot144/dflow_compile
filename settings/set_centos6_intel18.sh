@@ -12,14 +12,24 @@ module load autoconf/2.69
 module load libtool/2.4.3
 
 #MPICH
-module load mpich2/3.3_intel_18.0.3
-export MPIROOT=/opt/mpich2/3.3_intel18.0.3
-export MPI_LOCAL=F
+export MPI_LOCAL=T
+if [ "${MPI_LOCAL}" == "F" ]; then
+   module load mpich2/3.3_intel_18.0.3
+   export MPIROOT=/opt/mpich2/3.3_intel18.0.3
+   echo "MPIROOT = ${MPIROOT}"
+else
+   echo "Building local MPICH"
+fi
 
 #NETCDF
-module load netcdf/v4.6.2_v4.4.4_intel_18.0.3
-export NETCDF_LOCAL=F
-export NETCDFROOT=/opt/netcdf/v4.6.2_v4.4.4_intel_18.0.3
+export NETCDF_LOCAL=T
+if [ "${NETCDF_LOCAL}" == "F" ]; then
+   module load netcdf/v4.6.2_v4.4.4_intel_18.0.3
+   export NETCDFROOT=/opt/netcdf/v4.6.2_v4.4.4_intel_18.0.3
+   echo "NETCDFROOT = ${NETCDFROOT}"
+else
+   echo "Building local NetCDF"
+fi
 
 #PETSC
 export PETSC_LOCAL=T
