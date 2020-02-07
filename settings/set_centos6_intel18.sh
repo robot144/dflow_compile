@@ -1,7 +1,7 @@
 #! /bin/sh
 # Settings for H6 compilation of dflow
 
-echo "Settings for Cenots6 intel 18.0.3"
+echo "Settings for Centos6 intel 18.0.3"
 
 # development tools - existing on machine
 module load subversion
