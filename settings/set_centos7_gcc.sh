@@ -1,11 +1,11 @@
 #! /bin/sh
-# Settings for devux7 Centos7-Intel18 compilation of dflow
+# Settings for devux7 Centos7-GCC compilation of dflow
 
-echo "Settings for Centos7 with Intel 18 compiler"
+echo "Settings for Centos7 with gcc 4.9.2 compiler"
 
-#module load intel/18.0.3
-. /opt/intel/18.0.3/bin/compilervars.sh -arch intel64 -platform linux 
-export IFORTLIB=/opt/intel/18.0.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin
+# gcc compiler at /opt/gcc/4.9.2
+export GCCROOT=/opt/gcc/4.9.2
+export PATH=${GCCROOT}/bin:${PATH}
 
 ## no modules on devux
 #module load autoconf
