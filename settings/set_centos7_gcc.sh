@@ -6,6 +6,7 @@ echo "Settings for Centos7 with gcc 4.9.2 compiler"
 # gcc compiler at /opt/gcc/4.9.2
 export GCCROOT=/opt/gcc/4.9.2
 export PATH=${GCCROOT}/bin:${PATH}
+export LD_LIBRARY_PATH=${GCCROOT}/bin:${LD_LIBRARY_PATH}
 
 ## no modules on devux
 #module load autoconf
