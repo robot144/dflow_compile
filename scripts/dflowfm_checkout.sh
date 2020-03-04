@@ -1,7 +1,7 @@
 #! /bin/bash
 
 if [ ! -d dflowfm-trunk ]; then
-   module load subversion
+   #module load subversion
    svn co --username=${SVNUSER} https://svn.oss.deltares.nl/repos/delft3d/trunk dflowfm-trunk
    #autogen
    pushd dflowfm-trunk/src

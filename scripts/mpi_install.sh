@@ -80,11 +80,11 @@ done
 if [ "$FORT" == "ifort" ];then
 	export IFORTPATH=`which ifort 2>/dev/null`
 	if [ ! -z "$IFORTPATH" ]; then
-		export MYFORT="$IFORTPATH"
+		export MYFORT="ifort"
 	        export ICCPATH=`which icc 2>/dev/null`
-		export MYCC="$ICCPATH"
+		export MYCC="icc"
 	        export ICPCPATH=`which icpc 2>/dev/null`
-		export MYCXX="$ICPCPATH"
+		export MYCXX="icpc"
 	else
 		echo "No ifort compiler found"
 		exit 1
@@ -155,7 +155,7 @@ pushd $TEMPDIR
 # we are going to build a shared library later so the option -fPIC is needed and
 # --enable-shared triggers this option.
 if [ "$ARCH" == "64" ]; then
-	export archflag="-m64"
+	export archflag=""
 elif [ "$ARCH" == "32" ]; then
 	export archflag="-m32"
 else
@@ -178,7 +178,8 @@ fi
 #TODO workaround for out of source build
 #./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
 # try with shared libs
-./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib $SHAREDFLAGS --enable-cxx FFLAGS=" $archflag" CFLAGS=" $archflag" CXXFLAGS=" $archflag" FCFLAGS=" $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
+#./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib $SHAREDFLAGS --enable-cxx FFLAGS=" $archflag" CFLAGS=" $archflag" CXXFLAGS=" $archflag" FCFLAGS=" $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
+./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib --enable-cxx FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
 
 make
 #make check #optional tests

@@ -138,6 +138,10 @@ fi
 ## get dflow code from repos
 if [ ! -d dflowfm-trunk ]; then
    ./scripts/dflowfm_checkout.sh
+else #clean if not a fresh checkout
+   pushd dflowfm-trunk/src
+   make clean
+   popd
 fi
 
 ## Finally build Delft3D includig DFLOW itself
