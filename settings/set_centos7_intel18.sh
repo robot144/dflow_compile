@@ -3,41 +3,47 @@
 
 echo "Settings for Centos7 with Intel 18 compiler"
 
-#module load intel/18.0.3
-. /opt/intel/18.0.3/bin/compilervars.sh -arch intel64 -platform linux 
-export IFORTLIB=/opt/intel/18.0.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin
+# !!! Specific for v-dev001 system gfortran is too old TODO???
+	# gfortran seems to be used even though we are using ifort
+	# gcc compiler at /opt/gcc/4.9.2
+	#export GCCROOT=/opt/gcc/4.9.2
+	#export PATH=${GCCROOT}/bin:${PATH}
 
-## no modules on devux
-#module load autoconf
-#module load automake
-#module load libtool
+	#module load intel/18.0.3
+	. /opt/intel/18.0.3/bin/compilervars.sh -arch intel64 -platform linux 
+	export IFORTLIB=/opt/intel/18.0.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin
 
-#module load subversion
-export PATH=/opt/rh/sclo-subversion19/root/bin/svn:${PATH}
+	## no modules on devux
+	#module load autoconf
+	#module load automake
+	#module load libtool
+
+	#module load subversion
+	export PATH=/opt/rh/sclo-subversion19/root/bin/svn:${PATH}
 
 
-#MPICH
-export MPI_LOCAL=T
-if [ "${MPI_LOCAL}" == "F" ]; then
-   echo "No pre-compiled MPICH here."
-   exit 1
-   module load mpich2/3.3_intel_18.0.3
-   export MPIROOT=/opt/mpich2/3.3_intel18.0.3
-   echo "MPIROOT = ${MPIROOT}"
-else
-   echo "Building local MPICH"
-fi
+	#MPICH
+	export MPI_LOCAL=T
+	if [ "${MPI_LOCAL}" == "F" ]; then
+	   echo "No pre-compiled MPICH here."
+	   exit 1
+	   module load mpich2/3.3_intel_18.0.3
+	   export MPIROOT=/opt/mpich2/3.3_intel18.0.3
+	   echo "MPIROOT = ${MPIROOT}"
+	else
+	   echo "Building local MPICH"
+	fi
 
-#NETCDF
-export NETCDF_LOCAL=T
-if [ "${NETCDF_LOCAL}" == "F" ]; then
-   echo "No pre-compiled NETCDF here."
-   exit 1
-   module load netcdf/v4.6.2_v4.4.4_intel_18.0.3
-   export NETCDFROOT=/opt/netcdf/v4.6.2_v4.4.4_intel_18.0.3
-   echo "NETCDFROOT = ${NETCDFROOT}"
-else
-   echo "Building local NetCDF"
+	#NETCDF
+	export NETCDF_LOCAL=T
+	if [ "${NETCDF_LOCAL}" == "F" ]; then
+	   echo "No pre-compiled NETCDF here."
+	   exit 1
+	   module load netcdf/v4.6.2_v4.4.4_intel_18.0.3
+	   export NETCDFROOT=/opt/netcdf/v4.6.2_v4.4.4_intel_18.0.3
+	   echo "NETCDFROOT = ${NETCDFROOT}"
+	else
+	   echo "Building local NetCDF"
 fi
 
 #PETSC

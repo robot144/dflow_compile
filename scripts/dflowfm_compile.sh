@@ -12,6 +12,14 @@ export SHAPELIB_LDFLAGS=""
 export SHAPELIB_CONFARGS=""
 
 #
+# autogen
+#
+./autogen.sh 2>&1 |tee myautogen.log
+pushd third_party_open/kdtree2/
+./autogen.sh 2>&1 |tee ../../myautogen_kdtree.log
+popd
+
+#
 # configure
 #
 export log="$PWD/myconfig.log"
@@ -54,7 +62,7 @@ fi
 #
 # make delft3d-fm
 #
-export log="$PWD/mymake_dlfow.log"
+export log="$PWD/mymake_dflow.log"
 command="FC=mpif90 make ds-install -C engines_gpl/dflowfm 2>&1 |tee $log"
 
 eval $command
