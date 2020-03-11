@@ -2,11 +2,12 @@
 This repository contains some scripts to compile dflow (Delft3D Flexible Mesh) on linux systems.
 Currently the scripts support:
 
-os       | compiler    | status
-centos-6 | intel18.0.3 | working
-centos-6 | gcc-4.9.2   | not working
-centos-7 | intel 18    | not working
-centos-7 | gcc-4.9.2   | not working 
+|os       | compiler    | status      |
+|---------|-------------|-------------|
+|centos-6 | intel18.0.3 | working     |
+|centos-6 | gcc-4.9.2   | not working |
+|centos-7 | intel 18    | not working |
+|centos-7 | gcc-4.9.2   | not working |
 
 ## Compilation
 - Change the username in local.sh to your id as used in the Delft3D repository (contact oss.deltares.nl if you do not have one).
