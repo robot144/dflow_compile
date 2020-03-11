@@ -24,9 +24,9 @@ Currently the scripts support:
 ## Tests
 There are two test-cases available: a very simple model and a global tide-model. For the global tide model you will need to unzip one file (was too large for github)
 For example:
-`cd test/estuary_model`
-`../../dflowfm_linux_ifort/bin/dflow.sh estuary.mdu` For a scalar run with intel compiled binaries
-`../../dflowfm_linux_ifort/bin/partition.sh 2 estuary.mdu` Partition into two domains to prepare for parallel run
-`../../dflowfm_linux_ifort/bin/dflow_parallel.sh 2 estuary.mdu` Execute parallel run
+- `cd test/estuary_model`
+- `../../dflowfm_linux_ifort/bin/dflow.sh estuary.mdu` For a scalar run with intel compiled binaries
+- `../../dflowfm_linux_ifort/bin/partition.sh 2 estuary.mdu` Partition into two domains to prepare for parallel run
+- `../../dflowfm_linux_ifort/bin/dflow_parallel.sh 2 estuary.mdu` Execute parallel run
 
 
