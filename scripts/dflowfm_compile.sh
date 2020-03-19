@@ -14,9 +14,9 @@ export SHAPELIB_CONFARGS=""
 #
 # autogen
 #
-./autogen.sh 2>&1 |tee myautogen.log
+./autogen.sh --verbose 2>&1 |tee myautogen.log
 pushd third_party_open/kdtree2/
-./autogen.sh 2>&1 |tee ../../myautogen_kdtree.log
+./autogen.sh --verbose 2>&1 |tee ../../myautogen_kdtree.log
 popd
 
 #
