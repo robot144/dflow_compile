@@ -141,6 +141,8 @@ if [ ! -d dflowfm-trunk ]; then
 else #clean if not a fresh checkout
    pushd dflowfm-trunk/src
    make clean
+   export DFLOWFM_REV=`svn info | grep "Revision" | awk '{print $2}'`
+   echo "Current DFLOWFM version is ${DFLOWFM_REV}"
    popd
 fi
 
