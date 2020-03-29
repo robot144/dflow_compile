@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # compile petsc
 # argument gnu or ifort
 
@@ -51,10 +51,15 @@ pushd petsc-$PETSC_VERSION
 
 #removed -xHOST from FOPTFLAGS
 # removed -no-prec-div from FOPTFLAGS
-./configure --prefix=${PETSCROOT} --with-mpi=1 --with-mpi-dir=${MPIROOT}  \
+#./configure --prefix=${PETSCROOT} --with-mpi=1 --with-mpi-dir=${MPIROOT}  \
+#  --download-fblaslapack=1 --FOPTFLAGS="${flags} " --CXXOPTFLAGS="${flags} "\
+#  --with-debugging=0 --with-shared-libraries=1 --with-x=0 --with-valgrind=0 \
+#  --with-matlab-socket=0 --COPTFLAGS="${flags} " 
+./configure --prefix=${PETSCROOT} --with-mpi-dir=${MPIROOT}  \
   --download-fblaslapack=1 --FOPTFLAGS="${flags} " --CXXOPTFLAGS="${flags} "\
   --with-debugging=0 --with-shared-libraries=1 --with-x=0 --with-valgrind=0 \
   --with-matlab-socket=0 --COPTFLAGS="${flags} " 
+
 # --with-pthread=0 ??? also available for /opt
 
 make 2>&1 >mymake.log

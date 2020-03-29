@@ -4,7 +4,7 @@
 # requires one argument string like bare_centos7_intel18 or docker_suse15.1_gcc
 export BASE=$PWD
 
-allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gcc" "bare_centos6_gcc" "bare_centos6_intel18")
+allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gcc" "bare_centos6_gcc" "bare_centos6_intel18" "bare_ubuntu19_gcc", "bare_debian8_gcc")
 
 #
 # check argument
