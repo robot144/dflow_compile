@@ -50,24 +50,3 @@ METHOD=4
 OPERAND=O
 VALUE=77
 
-QUANTITY=internaltidesfrictioncoefficient
-FILENAME=itfrictioncoeff_0.0_uni.pol
-FILETYPE=10
-METHOD=4
-OPERAND=O
-VALUE=0.0
-
-QUANTITY=internaltidesfrictioncoefficient
-FILENAME=itfrictioncoeff_1_dmin500_gebco_January_withoutNaN.xyz
-FILETYPE=7
-METHOD=5
-OPERAND=O
-
-QUANTITY=internaltidesfrictioncoefficient
-FILENAME=all.pol
-FILETYPE=10
-METHOD=4
-OPERAND=*
-VALUE=0.0125
-
-
