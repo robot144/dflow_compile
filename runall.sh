@@ -1,7 +1,7 @@
 #! /bin/bash
 #
 # main compile script 
-# requires one argument string like bare_centos7_intel18 or docker_suse15.1_gcc
+# requires one argument string like bare_centos7_intel18 or docker_debian8_gcc
 export BASE=$PWD
 
 allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gcc" "bare_centos6_gcc" "bare_centos6_intel18" "bare_ubuntu19_gcc", "bare_debian8_gcc")
@@ -141,6 +141,8 @@ if [ ! -d dflowfm-trunk ]; then
 else #clean if not a fresh checkout
    pushd dflowfm-trunk/src
    make clean
+   export DFLOWFM_REV=`svn info | grep "Revision" | awk '{print $2}'`
+   echo "Current DFLOWFM version is ${DFLOWFM_REV}"
    popd
 fi
 
