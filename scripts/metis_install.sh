@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # compile metis
 # argument gnu or ifort
 
