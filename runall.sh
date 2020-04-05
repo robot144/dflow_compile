@@ -132,7 +132,7 @@ if [ "$METIS_LOCAL" == "T" ]; then
    fi
    export METIS_DIR=${METISROOT}
    export CPPFLAGS="-I${METISROOT}/include ${CPPFLAGS}"
-   export LDFLAGS="-L ${METISROOT}/lib ${LDFLAGS}"
+   export LDFLAGS="-L${METISROOT}/lib ${LDFLAGS}"
 fi
 
 ## get dflow code from repos

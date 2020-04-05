@@ -1,7 +1,7 @@
 #! /bin/sh
 # Settings for devux7 Centos7-GCC compilation of dflow
 
-echo "Settings for suse15.1 with gcc 7 compiler"
+echo "Settings for suse15.1 with intel20 compiler"
 
 ## no modules on devux
 #module load autoconf
@@ -10,8 +10,8 @@ echo "Settings for suse15.1 with gcc 7 compiler"
 
 #module load subversion
 
-. /opt64/intel/intel19/bin/compilervars.sh -arch intel64 -platform linux 
-export IFORTLIB=/opt64/intel/intel19/compilers_and_libraries/linux/lib/intel64_lin/
+. /opt64/intel/intel20/bin/compilervars.sh -arch intel64 -platform linux 
+#export IFORTLIB=
 
 #MPICH
 export MPI_LOCAL=T

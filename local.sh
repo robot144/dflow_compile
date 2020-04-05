@@ -4,13 +4,15 @@
 
 export SVNUSER=verlaan
 # Optimization vs debug
-export flags="-g"
+# flags included for included in CFLAGS, CXXFLAGS, FCFLAGS and FFLAGS for DFLOW
+export flags="-g -static-intel"
 #export flags="-O2"
 
 #compiler flags hopefully not needed
+export fflags="" #included in FCFLAGS and FFLAGS for DFLOW
+export lflags="" #included in LDFLAGS for DFLOW
 export configureArgs=""
 export CFLAGS=""
-export fflags="" #included in FCFLAGS and FFLAGS for DFLOW
 export FFLAGS=""
 export FCFLAGS=""
 export CXXFLAGS=""
