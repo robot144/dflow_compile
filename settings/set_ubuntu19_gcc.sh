@@ -5,6 +5,7 @@ echo "Settings for Centos7 with gcc 4.9.2 compiler"
 
 # gcc compiler 9.2.1 from ubuntu
 #export GCCROOT=/opt/gcc/4.9.2
+export GCCLIB=/lib/x86_64-linux-gnu
 #export PATH=${GCCROOT}/bin:${PATH}
 #export LD_LIBRARY_PATH=${GCCROOT}/bin:${LD_LIBRARY_PATH}
 

@@ -4,8 +4,8 @@
 
 export SVNUSER=verlaan
 # Optimization vs debug
-export flags="-g"
-#export flags="-O2"
+#export flags="-g"
+export flags="-O2"
 
 #compiler flags hopefully not needed
 export configureArgs=""

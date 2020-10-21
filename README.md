@@ -10,7 +10,7 @@ Currently the scripts support:
 |centos-7 | gcc-4.9.2   | working     |                               |
 |suse15.1 | gcc-?       | not working |                               |
 |suse15.1 | intel 19    | not working | sgsegv while loading lib      |
-|ubuntu19 | gcc 9       | not working | compiler crash                | 
+|ubuntu19 | gcc 9       | working     | manually change oc.c:1296     | 
 |ubuntu19 | intel 20    |             |                               | 
 |ubuntu19 | gcc-4.9.4   | working     | uses docker gcc4              | 
 

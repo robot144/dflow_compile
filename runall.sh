@@ -153,6 +153,8 @@ if [ ! -d "${DFLOWFMROOT}" ]; then
    #Copy intel runtime libs to target in case of ifort
    if [ "$COMPILERTYPE" == "ifort" ] ; then
       ./scripts/copylibs_intel.sh
+   else
+      ./scripts/copylibs_gnu.sh
    fi
    ./scripts/copy_files.sh #add files needed to run as stand-alone package
 fi
