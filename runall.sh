@@ -1,10 +1,10 @@
 #! /bin/bash
 #
 # main compile script 
-# requires one argument string like bare_centos7_intel18 or docker_debian8_gcc
+# requires one argument string like bare_centos7_intel20 or docker_debian8_gcc
 export BASE=$PWD
 
-allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gcc" "bare_centos6_gcc" "bare_centos6_intel18" "bare_ubuntu19_gcc" "bare_debian8_gcc")
+allowed_args=("bare_suse15.1_gcc" "bare_suse15.1_intel20" "bare_centos7_intel18" "bare_centos7_gcc" "bare_centos6_gcc" "bare_centos6_intel18" "bare_ubuntu19_gcc" "bare_ubuntu19_intel20" "bare_debian8_gcc")
 
 #
 # check argument
@@ -132,7 +132,7 @@ if [ "$METIS_LOCAL" == "T" ]; then
    fi
    export METIS_DIR=${METISROOT}
    export CPPFLAGS="-I${METISROOT}/include ${CPPFLAGS}"
-   export LDFLAGS="-L ${METISROOT}/lib ${LDFLAGS}"
+   export LDFLAGS="-L${METISROOT}/lib ${LDFLAGS}"
 fi
 
 ## get dflow code from repos

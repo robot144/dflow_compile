@@ -25,7 +25,7 @@ popd
 export log="$PWD/myconfig.log"
 command=" \
     CPPFLAGS='$PROJ_CPPFLAGS $SHAPELIB_CPPFLAGS' \
-    LDFLAGS='$PROJ_LDFLAGS $SHAPELIB_LDFLAGS' \
+    LDFLAGS='$lflags $LDFLAGS $PROJ_LDFLAGS $SHAPELIB_LDFLAGS' \
     CFLAGS='$flags $CFLAGS' \
     CXXFLAGS='$flags $CXXFLAGS' \
     AM_FFLAGS='$LDFLAGSMT_ADDITIONAL $AM_FFLAGS' \
@@ -33,7 +33,7 @@ command=" \
     AM_FCFLAGS='$LDFLAGSMT_ADDITIONAL $AM_FCFLAGS' \
     FCFLAGS='$flags $fflags $FCFLAGS' \
     AM_LDFLAGS='$LDFLAGSMT_ADDITIONAL $AM_LDFLAGS' \
-        ./configure --prefix=${DFLOWFMROOT} --with-mpi --with-petsc --with-metis=$METIS_DIR $PROJ_CONFARGS $SHAPELIB_CONFARGS $configureArgs 2>&1 |tee $log \
+        ./configure --prefix=${DFLOWFMROOT} --libdir=${DFLOWFMROOT}/lib  --with-mpi --with-petsc --with-metis=$METIS_DIR $PROJ_CONFARGS $SHAPELIB_CONFARGS $configureArgs 2>&1 |tee $log \
     "
 
 eval $command

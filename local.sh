@@ -8,9 +8,10 @@ export SVNUSER=verlaan
 export flags="-O2"
 
 #compiler flags hopefully not needed
+export fflags="" #included in FCFLAGS and FFLAGS for DFLOW
+export lflags="" #included in LDFLAGS for DFLOW
 export configureArgs=""
 export CFLAGS=""
-export fflags="" #included in FCFLAGS and FFLAGS for DFLOW
 export FFLAGS=""
 export FCFLAGS=""
 export CXXFLAGS=""
