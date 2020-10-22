@@ -28,4 +28,12 @@ else
    #cp $IFORTLIB/../../../mkl/lib/intel64/libmkl_avx2.so $DFLOWFMROOT/lib
    #cp $IFORTLIB/../../../mpi/intel64/lib/libmpi.so.12 $DFLOWFMROOT/lib
    #cp $IFORTLIB/../../../mpi/intel64/lib/libmpifort.so.12 $DFLOWFMROOT/lib
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libc.so.6
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libdl.so.2
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libexpat.so.1
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libgcc_s.so.1
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libm.so.6
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libopa.so
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libpthread.so.0
+   rm -f $DFLOWFMROOT/lib/dflowfm_linux64_ub19ifort20_o3/lib/libstdc++.so.6
 fi
