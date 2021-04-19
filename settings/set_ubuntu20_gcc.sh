@@ -7,6 +7,10 @@ echo "Settings for ubuntu 20.10 with gcc 10.2.0 compiler"
 #export GCCROOT=/opt/gcc/4.9.2
 export GCCVERSION=10
 export GCCLIB=/lib/x86_64-linux-gnu
+
+#issues with gfortran 10 and ,mpich, netcdf and delft3d
+export flags="${flags} -fallow-argument-mismatch" 
+        
 #export PATH=${GCCROOT}/bin:${PATH}
 #export LD_LIBRARY_PATH=${GCCROOT}/bin:${LD_LIBRARY_PATH}
 
