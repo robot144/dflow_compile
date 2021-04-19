@@ -1,7 +1,7 @@
 #! /bin/sh
 # Settings for devux7 Centos7-GCC compilation of dflow
 
-echo "Settings for Centos7 with gcc 4.9.2 compiler"
+echo "Setting for ubuntu 19 with gcc compiler"
 
 # gcc compiler 9.2.1 from ubuntu
 #export GCCROOT=/opt/gcc/4.9.2

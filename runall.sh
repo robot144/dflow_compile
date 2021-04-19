@@ -4,7 +4,7 @@
 # requires one argument string like bare_centos7_intel20 or docker_debian8_gcc
 export BASE=$PWD
 
-allowed_args=("bare_suse15.1_gcc" "bare_suse15.1_intel20" "bare_centos7_intel18" "bare_centos7_gcc" "bare_centos6_gcc" "bare_centos6_intel18" "bare_ubuntu19_gcc" "bare_ubuntu19_intel20" "bare_debian8_gcc")
+allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gcc" "bare_ubuntu19_gcc" "bare_ubuntu19_intel20" "bare_debian8_gcc" "bare_ubuntu20_gcc")
 
 #
 # check argument
@@ -95,8 +95,8 @@ fi
 if [ "$MPI_LOCAL" == "T" ]; then
    export MPIROOT=${BASE}/mpich_linux64_${COMPILERTYPE}
    if [ ! -d "${MPIROOT}" ]; then
-      #./scripts/mpi_install.sh $COMPILERTYPE 64 noshared
-      ./scripts/mpi_install.sh $COMPILERTYPE 64 shared
+      #./scripts/mpi_install.sh $COMPILERTYPE noshared
+      ./scripts/mpi_install.sh $COMPILERTYPE shared
    fi
    export PATH=${MPIROOT}/bin:${PATH}
    export LD_LIBRARY_PATH=${MPIROOT}/lib:${LD_LIBRARY_PATH}
@@ -106,7 +106,7 @@ fi
 if [ "$NETCDF_LOCAL" == "T" ]; then
    export NETCDFROOT=${BASE}/netcdf_linux64_${COMPILERTYPE}
    if [ ! -d "${NETCDFROOT}" ]; then
-      ./scripts/netcdf_install.sh $COMPILERTYPE 64 netcdf4
+      ./scripts/netcdf_install.sh $COMPILERTYPE netcdf4
    fi
    export PATH=${NETCDFROOT}/bin:${PATH}
    export LD_LIBRARY_PATH=${NETCDFROOT}/lib:${LD_LIBRARY_PATH}
@@ -138,13 +138,17 @@ fi
 ## get dflow code from repos
 if [ ! -d dflowfm-trunk ]; then
    ./scripts/dflowfm_checkout.sh
+   #
+   # NOTE: WORKAROUNDS for unsolved issues
+   #
+   /local_patches/pply_patches.sh
 else #clean if not a fresh checkout
    pushd dflowfm-trunk/src
-   make clean
    export DFLOWFM_REV=`svn info | grep "Revision" | awk '{print $2}'`
    echo "Current DFLOWFM version is ${DFLOWFM_REV}"
    popd
 fi
+
 
 ## Finally build Delft3D includig DFLOW itself
 export DFLOWFMROOT=${BASE}/dflowfm_linux64_${COMPILERTYPE}

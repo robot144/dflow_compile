@@ -12,7 +12,8 @@ fi
 export COMPILERTYPE=$1 
 echo "COMPILERTYPE $COMPILERTYPE"
 
-export PETSC_VERSION=3.9.4
+#export PETSC_VERSION=3.9.4
+export PETSC_VERSION=3.13.3
 if [ -z "${PETSCROOT}" ]; then
    export BASE=$PWD
    export PETSCROOT=${PWD}/petsc_linux64_${COMPILERTYPE}
@@ -58,7 +59,7 @@ pushd petsc-$PETSC_VERSION
 ./configure --prefix=${PETSCROOT} --with-mpi-dir=${MPIROOT}  \
   --download-fblaslapack=1 --FOPTFLAGS="${flags} " --CXXOPTFLAGS="${flags} "\
   --with-debugging=0 --with-shared-libraries=1 --with-x=0 --with-valgrind=0 \
-  --with-matlab-socket=0 --COPTFLAGS="${flags} " 
+  --with-matlab-socket=0 --COPTFLAGS="${flags} " 2>&1 >myconfig.log
 
 # --with-pthread=0 ??? also available for /opt
 

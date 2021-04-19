@@ -118,11 +118,13 @@ export BASE=$PWD
 #
 # MPICH
 #
-export MPIVERSION='3.3.1'
+#export MPIVERSION='3.3.1' #gfortran has a problem with 3.3.2
+export MPIVERSION='3.3.2'
 export EXTRACTDIR="$BASE/mpich-$MPIVERSION"
 export MPIFILE="external_sources/mpich-${MPIVERSION}.tar.gz"
 # http://www.mpich.org/static/downloads/3.3.1/mpich-3.3.1.tar.gz
-export MPIURL="http://www.mpich.org/static/downloads/$MPIVERSION/mpich-$MPIVERSION.tar.gz"
+#export MPIURL="http://www.mpich.org/static/downloads/$MPIVERSION/mpich-$MPIVERSION.tar.gz"
+export MPIURL="https://www.mpich.org/static/downloads/$MPIVERSION/mpich-$MPIVERSION.tar.gz"
 if [ ! -f "$MPIFILE" ]; then
 	curl -o "$MPIFILE"  "$MPIURL"
 	if [ $? -gt 0 ]; then
@@ -133,6 +135,12 @@ fi
 
 if [ -z "${MPIROOT}" ]; then
    export MPIROOT="${BASE}/mpich_linux64_${FORT}"
+fi
+
+# workaround gfortran 10
+if [ "${GCCVERSION}" == "10" ];then
+   echo "Apply workaround for g"
+   export FFLAGS="-w -fallow-argument-mismatch -O2"
 fi
 
 #
@@ -179,7 +187,7 @@ fi
 #./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib $SHAREDFLAGS --enable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
 # try with shared libs
 #./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib $SHAREDFLAGS --enable-cxx FFLAGS=" $archflag" CFLAGS=" $archflag" CXXFLAGS=" $archflag" FCFLAGS=" $archflag" FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
-./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib --enable-cxx FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX"
+./configure --prefix=${MPIROOT} --libdir=${MPIROOT}/lib --enable-cxx FC="$MYFORT" F77="$MYFORT" CC="$MYCC" CXX="$MYCXX" 2>&1 >myconfig.log
 
 make
 #make check #optional tests

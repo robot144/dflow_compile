@@ -214,7 +214,7 @@ pushd $TEMPDIR
 # we are going to build a shared library later so the option -fPIC is needed and
 # --enable-shared triggers this option.
 if [ "$ARCH" == "64" ]; then
-	export archflag="-m64"
+	export archflag=""
 elif [ "$ARCH" == "32" ]; then
 	export archflag="-m32"
 else
@@ -279,12 +279,20 @@ mkdir $TEMPDIRF
 pushd $TEMPDIRF
 
 
-# install to dirs like linux32_ifort
+#
+# NOTE: WORKAROUND for gfortran10 and netcdf-fortran-4.4.4
+# 
+#
+if [ $GCCVERSION == 10 ];then
+  FCFLAGS_ADD=" -fallow-argument-mismatch"
+  FFLAGS_ADD=" -fallow-argument-mismatch"
+fi
+
 # use lib also for 64bit
 export LD_LIBRARY_PATH=${BASE}/netcdf_${SYSTEM}/lib:$LD_LIBRARY_PATH
 #$EXTRACTDIRF/configure --prefix=$BASE/netcdf_$SYSTEM --libdir=$BASE/netcdf_$SYSTEM/lib $NETCDF4FLAGS $DAPFLAGS $sharedlibflag --with-pic --disable-cxx FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT"
 #$EXTRACTDIRF/configure --prefix=$BASE/netcdf_$SYSTEM --libdir=$BASE/netcdf_$SYSTEM/lib --with-pic CPPFLAGS="-I${BASE}/netcdf_${SYSTEM}/include" LDFLAGS="-L${BASE}/netcdf_${SYSTEM}/lib" FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT"
-$EXTRACTDIRF/configure --prefix=$BASE/netcdf_$SYSTEM --libdir=$BASE/netcdf_$SYSTEM/lib --with-pic CPPFLAGS="-I${BASE}/netcdf_${SYSTEM}/include" LDFLAGS="-L${BASE}/netcdf_${SYSTEM}/lib" FFLAGS="-fPIC $archflag" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag" FC="$MYFORT"
+$EXTRACTDIRF/configure --prefix=$BASE/netcdf_$SYSTEM --libdir=$BASE/netcdf_$SYSTEM/lib --with-pic CPPFLAGS="-I${BASE}/netcdf_${SYSTEM}/include" LDFLAGS="-L${BASE}/netcdf_${SYSTEM}/lib" FFLAGS="-fPIC $archflag ${FFLAGS_ADD}" CFLAGS="-fPIC $archflag" CXXFLAGS="-fPIC $archflag" FCFLAGS="-fPIC $archflag ${FCFLAGS_ADD}" FC="$MYFORT"
 
 make
 #make check #optional tests

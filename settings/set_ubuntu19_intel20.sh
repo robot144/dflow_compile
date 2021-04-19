@@ -1,7 +1,7 @@
 #! /bin/sh
 # Settings for devux7 Centos7-GCC compilation of dflow
 
-echo "Settings for Centos7 with gcc 4.9.2 compiler"
+echo "Settings for ubuntu 19 with intel 20 compiler"
 
 # gcc compiler 9.2.1 from ubuntu
 . /opt64/intel/intel20/bin/compilervars.sh -arch intel64 -platform linux 
