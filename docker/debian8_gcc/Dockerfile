@@ -11,6 +11,7 @@ RUN apt-get install -y flex
 RUN apt-get install -y bison
 RUN apt-get install -y rsync
 RUN apt-get install -y uuid-dev
+RUN apt-get install -y ruby
 RUN apt-get install -y vim
 
 #RUN useradd -d /home/ubuntu -ms /bin/bash -g root -G sudo -p ubuntu ubuntu

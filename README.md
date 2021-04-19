@@ -1,4 +1,5 @@
 # dflow_compile
+
 This repository contains some scripts to compile dflow (Delft3D Flexible Mesh) on linux systems.
 Currently the scripts support:
 
@@ -6,12 +7,10 @@ Currently the scripts support:
 |---------|-------------|-------------|-------------------------------|
 |centos-6 | intel18.0.3 | working     |                               |
 |centos-6 | gcc-4.9.2   | working     |                               |
-|centos-7 | intel 18    | not working | sigsegv while loading lib     |
+|centos-7 | intel 18    | unknown     | possibly fixed, but not tested|
 |centos-7 | gcc-4.9.2   | working     |                               |
-|suse15.1 | gcc-?       | not working |                               |
-|suse15.1 | intel 19    | not working | sgsegv while loading lib      |
 |ubuntu19 | gcc 9       | working     | manually change oc.c:1296     | 
-|ubuntu19 | intel 20    |             |                               | 
+|ubuntu19 | intel 20    | working     |                               | 
 |ubuntu19 | gcc-4.9.4   | working     | uses docker gcc4              | 
 
 ## Compilation
@@ -34,4 +33,8 @@ For example:
 - `../../dflowfm_linux_ifort/bin/partition.sh 2 estuary.mdu` Partition into two domains to prepare for parallel run
 - `../../dflowfm_linux_ifort/bin/dflow_parallel.sh 2 estuary.mdu` Execute parallel run
 
+## Issues
+- Ruby is used to copy dependent libraries into the target lib folder, but it copies too many underlying libs that will proably break things, when one copies the binaries somewhere else. In scripts/copylibs_intel.sh they are deleted again. Without ruby installed this doesn't happen, but then a few compiler specific libs are not copied along.
+- On ubuntu with a modern gcc the file oc.c has 2 arguments on line 1296. With optimization, this fails for reasons unclear to me. Add a third arguments as a few lines above as a workaround.
+- Before Oct 2020 there were issues with recent operating systems and compilers. Some were related to iso-c binding of strings in Fortran.
 

@@ -1,11 +1,16 @@
 #! /bin/sh
-# Settings for devux7 Centos7-GCC compilation of dflow
+# Settings for ubuntu19 with intel20 compilation of dflow
 
+<<<<<<< HEAD
 echo "Settings for ubuntu 19 with intel 20 compiler"
+=======
+echo "Settings for Ubuntu 19 with Intel 20 compiler"
+>>>>>>> a5cff1bc9f1b6042a2151e0a06ff79d0c4c9ef77
 
-# gcc compiler 9.2.1 from ubuntu
-. /opt64/intel/intel20/bin/compilervars.sh -arch intel64 -platform linux 
+# Intel 20 compiler
+. /opt64/intel/bin/compilervars.sh -arch intel64 -platform linux 
 #export LD_LIBRARY_PATH=/opt64/...
+export IFORTLIB=/opt64/intel/compilers_and_libraries/linux/lib/intel64
 
 ## build tools from ubuntu
 #module load autoconf
