@@ -141,7 +141,7 @@ if [ ! -d dflowfm-trunk ]; then
    #
    # NOTE: WORKAROUNDS for unsolved issues
    #
-   /local_patches/pply_patches.sh
+   ./local_patches/apply_patches.sh
 else #clean if not a fresh checkout
    pushd dflowfm-trunk/src
    export DFLOWFM_REV=`svn info | grep "Revision" | awk '{print $2}'`
@@ -161,8 +161,10 @@ if [ ! -d "${DFLOWFMROOT}" ]; then
       ./scripts/copylibs_gnu.sh
    fi
    ./scripts/copy_files.sh #add files needed to run as stand-alone package
+else
+   echo "Output folder exist. Please remove and restart to compile."
+   echo "rm -rf ${DFLOWFMROOT}"
 fi
-# ./scripts/copy_files.sh #add files needed to run as stand-alone package
 
 
 

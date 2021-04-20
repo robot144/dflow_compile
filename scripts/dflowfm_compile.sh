@@ -15,7 +15,7 @@ export SHAPELIB_CONFARGS=""
 # autogen
 #
 export RUN_AUTOGEN=1
-if [ ${RUN_AUTOGEN} -ne 0];then
+if [ ${RUN_AUTOGEN} -ne 0 ];then
    if [ -f Makefile.in ];then
       make clean
    fi
