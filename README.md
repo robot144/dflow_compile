@@ -7,17 +7,17 @@ Currently the scripts support:
 
 |os       | compiler    | status      | comment                       |
 |---------|-------------|-------------|-------------------------------|
-|centos-7 | intel 18    | unknown     | possibly fixed, but not tested|
+|centos-7 | intel 18    | working     | simple tests are working      |
 |centos-7 | gcc-        | unknown     |                               |
 |ubuntu19 | gcc 9       | unknown     | manually change oc.c:1296     | 
 |ubuntu19 | gcc-4.9.4   | unknown     | uses docker gcc4              | 
-|ubuntu20 | gcc-10.2.0  | unknown     | workrounds for gcc10          | 
+|ubuntu20 | gcc-10.2.0  | working     | workrounds for gcc10          | 
 
 *System specific versions*
 
 |os       | compiler    | status      | comment                       |
 |---------|-------------|-------------|-------------------------------|
-|cartesius| intel18     | unknown     | Caresius at surfsara.nl       | 
+|cartesius| intel18     | working     | Cartesius at surfsara.nl      | 
 
 ## Compilation
 - Change the username in local.sh to your id as used in the Delft3D repository (contact oss.deltares.nl if you do not have one).

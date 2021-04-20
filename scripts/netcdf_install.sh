@@ -171,8 +171,8 @@ fi
 #
 # NETCDF
 #
-#ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-c-4.6.2.tar.gz
-export NETCDFVERSION='4.6.2'
+#ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-c-4.7.4.tar.gz
+export NETCDFVERSION='4.7.4'
 export NETCDFFILE="external_sources/netcdf-c-${NETCDFVERSION}.tar.gz"
 export NETCDFURL="ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-c-${NETCDFVERSION}.tar.gz"
 if [ ! -f "$NETCDFFILE" ]; then
@@ -182,8 +182,8 @@ if [ ! -f "$NETCDFFILE" ]; then
 		exit 1
 	fi
 fi
-#ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz
-export NETCDFFORTRANVERSION='4.4.4'
+#ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.5.3.tar.gz
+export NETCDFFORTRANVERSION='4.5.3'
 export NETCDFFORTRANFILE="external_sources/netcdf-fortran-${NETCDFFORTRANVERSION}.tar.gz"
 echo "NETCDFFORTRANFILE = ${NETCDFFORTRANFILE}"
 export NETCDFFORTRANURL="ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-${NETCDFFORTRANVERSION}.tar.gz"
@@ -283,10 +283,10 @@ pushd $TEMPDIRF
 # NOTE: WORKAROUND for gfortran10 and netcdf-fortran-4.4.4
 # 
 #
-if [ $GCCVERSION == 10 ];then
-  FCFLAGS_ADD=" -fallow-argument-mismatch"
-  FFLAGS_ADD=" -fallow-argument-mismatch"
-fi
+#if [ $GCCVERSION == 10 ];then
+#  FCFLAGS_ADD=" -fallow-argument-mismatch"
+#  FFLAGS_ADD=" -fallow-argument-mismatch"
+#fi
 
 # use lib also for 64bit
 export LD_LIBRARY_PATH=${BASE}/netcdf_${SYSTEM}/lib:$LD_LIBRARY_PATH
