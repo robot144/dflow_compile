@@ -104,6 +104,8 @@ if [ "$MPI_LOCAL" == "T" ]; then
    export LD_LIBRARY_PATH=${MPIROOT}/lib:${LD_LIBRARY_PATH}
 fi
 
+
+
 ## build NetCDF including NetCDF4 and fortran bindings
 if [ "$NETCDF_LOCAL" == "T" ]; then
    echo "Compiling local NETCDF"
@@ -115,6 +117,7 @@ if [ "$NETCDF_LOCAL" == "T" ]; then
    export LD_LIBRARY_PATH=${NETCDFROOT}/lib:${LD_LIBRARY_PATH}
    export PKG_CONFIG_PATH=${NETCDFROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}
 fi
+
 
 ## build petsc
 if [ "$PETSC_LOCAL" == "T" ]; then

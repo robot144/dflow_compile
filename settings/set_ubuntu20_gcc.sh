@@ -1,5 +1,5 @@
 #! /bin/sh
-# Settings for devux7 Centos7-GCC compilation of dflow
+# Settings for Ubuntu 20 with gfortran 10
 
 echo "Settings for ubuntu 20.10 with gcc 10.2.0 compiler"
 
@@ -8,7 +8,10 @@ echo "Settings for ubuntu 20.10 with gcc 10.2.0 compiler"
 export GCCVERSION=10
 export GCCLIB=/lib/x86_64-linux-gnu
 
-#issues with gfortran 10 and ,mpich, netcdf and delft3d
+#issues with gfortran 10 and mpich, netcdf (prior to 4.7) and delft3d
+# The flag below is still needed for mpich and deltares_common
+# GCC10 now checks calls to definitions and thus can find more errors and dirty
+# tricks. Packages will adapt over time, but some slowly.
 export flags="${flags} -fallow-argument-mismatch" 
         
 #export PATH=${GCCROOT}/bin:${PATH}
@@ -27,9 +30,6 @@ export MPI_LOCAL=T
 if [ "${MPI_LOCAL}" == "F" ]; then
    echo "No pre-compiled MPICH here."
    exit 1
-   module load mpich2/3.3_intel_18.0.3
-   export MPIROOT=/opt/mpich2/3.3_intel18.0.3
-   echo "MPIROOT = ${MPIROOT}"
 else
    echo "Building local MPICH"
 fi
@@ -39,9 +39,6 @@ export NETCDF_LOCAL=T
 if [ "${NETCDF_LOCAL}" == "F" ]; then
    echo "No pre-compiled NETCDF here."
    exit 1
-   module load netcdf/v4.6.2_v4.4.4_intel_18.0.3
-   export NETCDFROOT=/opt/netcdf/v4.6.2_v4.4.4_intel_18.0.3
-   echo "NETCDFROOT = ${NETCDFROOT}"
 else
    echo "Building local NetCDF"
 fi
@@ -51,9 +48,6 @@ export PETSC_LOCAL=T
 if [ "${PETSC_LOCAL}" == "F" ]; then
    echo "No pre-compiled PETSC here."
    exit 1
-   module load petsc/3.9.3_intel18.0.3_mpich_3.3
-   export PETSCROOT=/opt/petsc/with_mpich_3.3/3.9.3_intel18.0.3
-   echo "PETSCROOT = ${PETSCROOT}"
 else
    echo "Building local PETSC"
 fi
@@ -63,9 +57,6 @@ export METIS_LOCAL=T
 if [ "$METIS_LOCAL}" == "F" ]; then
    echo "No pre-compiled METIS here."
    exit 1
-   module load metis/5.1.0_intel18.0.3
-   export METISROOT=/opt/metis/5.1.0_intel18.0.3
-   echo "METISROOT = ${METISROOT}"
 else
    echo "Building local Metis"
 fi
