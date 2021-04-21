@@ -4,7 +4,7 @@
 # requires one argument string like bare_centos7_intel20 or docker_debian8_gcc
 export BASE=$PWD
 
-allowed_args=("bare_suse15.1_gcc" "bare_centos7_intel18" "bare_centos7_gcc" "bare_ubuntu19_gcc" "bare_ubuntu19_intel20" "bare_debian8_gcc" "bare_ubuntu20_gcc")
+allowed_args=("bare_centos7_intel18" "bare_centos7_gcc" "bare_ubuntu19_gcc" "bare_ubuntu19_intel20" "bare_debian8_gcc" "bare_ubuntu20_gcc" "bare_cartesius_intel18")
 
 #
 # check argument
@@ -57,11 +57,12 @@ echo "SETTINGS $SETTINGS" #debug output
 
 # check if programs needed are there
 # test for programs
-programs=("make" "automake" "svn" "autoreconf" "libtool" "cmake")
+#programs=("make" "automake" "svn" "autoreconf" "libtool" "cmake")
+programs=("make" "automake" "svn" "autoreconf" "libtool")
 for program in ${programs[@]} ;do
 	temp=`which $program`
 	if [ -z "$temp" ] ; then
-		echo "Could not find $program"
+		echo "Could not find $program. Exit runall.sh"
 		exit 1
 	fi
 done
@@ -93,6 +94,7 @@ fi
 
 ## build mpi
 if [ "$MPI_LOCAL" == "T" ]; then
+   echo "comiling local MPI"
    export MPIROOT=${BASE}/mpich_linux64_${COMPILERTYPE}
    if [ ! -d "${MPIROOT}" ]; then
       #./scripts/mpi_install.sh $COMPILERTYPE noshared
@@ -104,6 +106,7 @@ fi
 
 ## build NetCDF including NetCDF4 and fortran bindings
 if [ "$NETCDF_LOCAL" == "T" ]; then
+   echo "Compiling local NETCDF"
    export NETCDFROOT=${BASE}/netcdf_linux64_${COMPILERTYPE}
    if [ ! -d "${NETCDFROOT}" ]; then
       ./scripts/netcdf_install.sh $COMPILERTYPE netcdf4
@@ -115,6 +118,7 @@ fi
 
 ## build petsc
 if [ "$PETSC_LOCAL" == "T" ]; then
+   echo "Compiling local PETSC"
    export PETSCROOT=${BASE}/petsc_linux64_${COMPILERTYPE}
    if [ ! -d "${PETSCROOT}" ]; then
       ./scripts/petsc_install.sh $COMPILERTYPE
@@ -125,7 +129,8 @@ if [ "$PETSC_LOCAL" == "T" ]; then
 fi
 
 ## build metis 
-if [ "$METIS_LOCAL" == "T" ]; then
+if [ "${METIS_LOCAL}" == "T" ]; then
+   echo "Compiling local METIS"
    export METISROOT=${BASE}/metis_linux64_${COMPILERTYPE}
    if [ ! -d "${METISROOT}" ]; then
       ./scripts/metis_install.sh $COMPILERTYPE
@@ -137,6 +142,7 @@ fi
 
 ## get dflow code from repos
 if [ ! -d dflowfm-trunk ]; then
+   echo "Checkout source code for Delft3D/DFLOW"
    ./scripts/dflowfm_checkout.sh
    #
    # NOTE: WORKAROUNDS for unsolved issues
@@ -153,6 +159,7 @@ fi
 ## Finally build Delft3D includig DFLOW itself
 export DFLOWFMROOT=${BASE}/dflowfm_linux64_${COMPILERTYPE}
 if [ ! -d "${DFLOWFMROOT}" ]; then
+   echo "Compile Delft3D/DFLOW"
    ./scripts/dflowfm_compile.sh $COMPILERTYPE
    #Copy intel runtime libs to target in case of ifort
    if [ "$COMPILERTYPE" == "ifort" ] ; then

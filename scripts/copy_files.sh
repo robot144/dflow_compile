@@ -14,20 +14,42 @@ cp runscripts/*.* ${DFLOWFMROOT}/bin/
 
 #mpi
 echo "MPI: ${MPIROOT}"
-cp ${MPIROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp ${MPIROOT}/lib/* ${DFLOWFMROOT}/lib/
+if [ ! -z "${MPIROOT}" ];then
+   if [ -d ${MPIROOT}/bin ];then
+     cp ${MPIROOT}/bin/* ${DFLOWFMROOT}/bin/
+   fi
+   if [ -d ${MPIROOT}/lib ];then
+     cp ${MPIROOT}/lib/* ${DFLOWFMROOT}/lib/
+   fi
+fi 
 
 #netcdf
 echo "NETCDF: ${NETCDFROOT}"
-cp ${NETCDFROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp ${NETCDFROOT}/lib/*.* ${DFLOWFMROOT}/lib/
+if [ ! -z "${NETCDFROOT}" ];then
+   if [ -d ${NETCDFROOT}/bin ];then
+      cp ${NETCDFROOT}/bin/* ${DFLOWFMROOT}/bin/
+   fi
+   if [ -d ${NETCDFROOT}/lib ];then
+      cp ${NETCDFROOT}/lib/*.* ${DFLOWFMROOT}/lib/
+   fi
+fi
 
 #petsc
 echo "PETSC: ${PETSCROOT}"
 #cp ${PETSCROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp ${PETSCROOT}/lib/*.* ${DFLOWFMROOT}/lib/
+if [ ! -z "${PETSCROOT}" ];then
+   if [ -d ${PETSCROOT}/lib ];then
+      cp ${PETSCROOT}/lib/*.* ${DFLOWFMROOT}/lib/
+   fi
+fi
 
 #metis
 echo "METIS: ${METISROOT}"
 #cp ${METISROOT}/bin/* ${DFLOWFMROOT}/bin/
-cp ${METISROOT}/lib/*.* ${DFLOWFMROOT}/lib/
+if [ ! -z "${METISROOT}" ];then
+   if [ -d ${METISROOT}/lib ];then
+      cp ${METISROOT}/lib/*.* ${DFLOWFMROOT}/lib/
+   fi
+fi
+
+
