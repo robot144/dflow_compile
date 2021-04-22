@@ -147,6 +147,11 @@ fi
 if [ ! -d dflowfm-trunk ]; then
    echo "Checkout source code for Delft3D/DFLOW"
    ./scripts/dflowfm_checkout.sh
+   if [ $? -ne 0 ]; then
+      echo ERROR: "Checkout incomplete."
+      exit 1
+   fi
+
    #
    # NOTE: WORKAROUNDS for unsolved issues
    #

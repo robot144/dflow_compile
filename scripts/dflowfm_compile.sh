@@ -65,15 +65,15 @@ fi
 #
 # make delft3d
 #
-export log="$PWD/mymake_delft3d.log"
-command="FC=mpif90 make ds-install 2>&1 |tee $log"
-
 export COMPILE_D3D=1 # 0 = true
 if [ $COMPILE_D3D -ne 0 ];then
+   export log="$PWD/mymake_delft3d.log"
+   command="FC=mpif90 make ds-install 2>&1 |tee $log"
+
    echo "Start compilation of Delft3D and tools"
    eval $command
 
-   if [ $? -ne 0 ]; then
+   if [ $? -ne 0 ]; then #This does not seem to work!
        echo "ERROR: Make delft3d fails!"
        echo "Log can be found in: $log"
        popd
@@ -86,12 +86,12 @@ fi
 #
 # make delft3d-fm
 #
-export log="$PWD/mymake_dflow.log"
-command="FC=mpif90 make ds-install -C engines_gpl/dflowfm 2>&1 |tee $log"
-
 export COMPILE_DFLOW=1 # 1 = true
 if [ $COMPILE_DFLOW -ne 0 ];then
-	echo "Start compilation of Dflow (Delft3D-FM)"
+   export log="$PWD/mymake_dflow.log"
+   command="FC=mpif90 make ds-install -C engines_gpl/dflowfm 2>&1 |tee $log"
+
+   echo "Start compilation of Dflow (Delft3D-FM)"
    eval $command
    
    if [ $? -ne 0 ]; then
